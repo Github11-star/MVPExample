@@ -1,6 +1,7 @@
 package com.example.mvpexample.presenter
 
 import com.example.mvpexample.contracts.MainActivityContract
+import com.example.mvpexample.launchOnMain
 import com.example.mvpexample.network.model.UniversityDTO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,14 +26,14 @@ class MainPresenter(
     }
 
     override fun onLoading() {
-        view.onLoading()
+        scope.launchOnMain { view.onLoading() }
     }
 
     override fun onError(message: String) {
-        view.onError(message)
+        scope.launchOnMain { view.onError(message) }
     }
 
     override fun onSuccess(list: List<UniversityDTO>) {
-        view.onSuccess(list)
+        scope.launchOnMain { view.onSuccess(list) }
     }
 }
